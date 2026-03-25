@@ -193,14 +193,24 @@ async def generate_llm_response(
 ) -> str:
     """
     Combine structured results + RAG context and generate a response via LLM.
-    Falls back to template responses if OpenAI is not configured.
+    Supports OpenAI and Groq providers.
     """
-    if not settings.openai_api_key:
+    provider = settings.llm_provider.lower()
+    
+    # Decide which API to hit
+    if provider == "groq" and settings.groq_api_key:
+        api_url = "https://api.groq.com/openai/v1/chat/completions"
+        api_key = settings.groq_api_key
+        model = settings.groq_model
+    elif provider == "openai" and settings.openai_api_key:
+        api_url = "https://api.openai.com/v1/chat/completions"
+        api_key = settings.openai_api_key
+        model = settings.openai_model
+    else:
         return _template_response(intent, products, rag_context, order_info, user_message)
 
     context_parts = []
-
-    # Products context
+    # ... rest of the context building remains the same ...
     if products:
         product_lines = []
         for p in products[:6]:
@@ -211,20 +221,19 @@ async def generate_llm_response(
             )
         context_parts.append("AVAILABLE PRODUCTS:\n" + "\n".join(product_lines))
 
-    # RAG context (FAQs / policies)
     faq_hits = [r for r in rag_context if r["metadata"].get("type") in ("faq", "policy")]
     if faq_hits:
         context_parts.append("RELEVANT KNOWLEDGE:\n" + "\n".join(
             f"- {h['text'][:300]}" for h in faq_hits[:3]
         ))
 
-    # Order context
     if order_info:
         context_parts.append(f"ORDER INFO:\n{json.dumps(order_info, indent=2)}")
 
     context = "\n\n".join(context_parts) if context_parts else "No specific product/FAQ data found."
 
     messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
         {
             "role": "user",
             "content": f"""User question: {user_message}
@@ -243,14 +252,14 @@ If no products match, say so helpfully and suggest alternatives."""
     try:
         async with httpx.AsyncClient(timeout=30) as client:
             resp = await client.post(
-                "https://api.openai.com/v1/chat/completions",
+                api_url,
                 headers={
-                    "Authorization": f"Bearer {settings.openai_api_key}",
+                    "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json",
                 },
                 json={
-                    "model": settings.openai_model,
-                    "messages": [{"role": "system", "content": SYSTEM_PROMPT}] + messages,
+                    "model": model,
+                    "messages": messages,
                     "max_tokens": 400,
                     "temperature": 0.7,
                 },
@@ -259,7 +268,7 @@ If no products match, say so helpfully and suggest alternatives."""
             data = resp.json()
             return data["choices"][0]["message"]["content"].strip()
     except Exception as e:
-        logger.error(f"OpenAI error: {e}")
+        logger.error(f"{provider.capitalize()} error: {e}")
         return _template_response(intent, products, rag_context, order_info, user_message)
 
 

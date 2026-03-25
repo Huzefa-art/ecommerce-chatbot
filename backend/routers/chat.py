@@ -9,7 +9,7 @@ from typing import Optional, Any
 import logging
 
 from services.llm_service import detect_intent, extract_filters, generate_llm_response
-from services.airtable_service import airtable_service
+from services.data_service import get_data_service
 from services.rag_service import rag_service
 from config import settings
 
@@ -62,6 +62,8 @@ async def chat(req: ChatRequest):
     msg = req.message.strip()
     logger.info(f"Chat [{req.session_id}]: {msg[:100]}")
 
+    data_service = get_data_service()
+
     # ── 1. Intent detection ───────────────────────────────────────────────
     intent = detect_intent(msg)
     filters = extract_filters(msg)
@@ -75,11 +77,11 @@ async def chat(req: ChatRequest):
     if intent == "order_tracking":
         order_id = filters.get("order_id")
         if order_id:
-            order_info = await airtable_service.get_order(order_id)
+            order_info = await data_service.get_order(order_id)
 
     # ── 3. Structured product search ──────────────────────────────────────
     elif intent == "product_search":
-        products = await airtable_service.search_products_structured(
+        products = await data_service.search_products_structured(
             category=filters.get("category"),
             max_price=filters.get("max_price"),
             min_price=filters.get("min_price"),
@@ -94,7 +96,7 @@ async def chat(req: ChatRequest):
                 msg, doc_types=["product"], n_results=6
             )
             if rag_hits:
-                all_products = await airtable_service.get_all_products()
+                all_products = await data_service.get_all_products()
                 semantic_products = rag_service.enrich_products_with_rag(rag_hits, all_products)
                 # Merge, dedup
                 existing_ids = {p["id"] for p in products}
@@ -107,7 +109,7 @@ async def chat(req: ChatRequest):
             msg, doc_types=["product"], n_results=8
         )
         if rag_hits:
-            all_products = await airtable_service.get_all_products()
+            all_products = await data_service.get_all_products()
             products = rag_service.enrich_products_with_rag(rag_hits, all_products)
         # Apply any explicit filters found alongside natural query
         if filters and products:
@@ -127,7 +129,7 @@ async def chat(req: ChatRequest):
     # ── 6. Fallback: do both ──────────────────────────────────────────────
     else:
         rag_hits = await rag_service.semantic_search(msg, n_results=6)
-        all_products = await airtable_service.get_all_products()
+        all_products = await data_service.get_all_products()
         products = rag_service.enrich_products_with_rag(rag_hits, all_products)
         products = products[:4]
 

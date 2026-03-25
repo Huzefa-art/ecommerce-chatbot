@@ -30,6 +30,15 @@ class Settings(BaseSettings):
         default="FAQs", env="AIRTABLE_FAQ_TABLE"
     )
 
+    # ── LLM Provider ────────────────────────────────────────────────────────
+    llm_provider: str = Field(default="groq", env="LLM_PROVIDER")
+    groq_api_key: str = Field(default="", env="GROQ_API_KEY")
+    groq_model: str = Field(default="llama-3.3-70b-versatile", env="GROQ_MODEL")
+
+    # ── Data Source ─────────────────────────────────────────────────────────
+    data_source: str = Field(default="sqlite", env="DATA_SOURCE")
+    sqlite_db_path: str = Field(default="./ecommerce.db", env="SQLITE_DB_PATH")
+
     # ── ChromaDB ────────────────────────────────────────────────────────────
     chroma_persist_dir: str = Field(
         default="./chroma_db", env="CHROMA_PERSIST_DIR"
@@ -41,7 +50,7 @@ class Settings(BaseSettings):
     # ── App ─────────────────────────────────────────────────────────────────
     demo_mode: bool = Field(
         default=True, env="DEMO_MODE",
-        description="Use bundled demo data when Airtable is not configured"
+        description="Use bundled demo data when Airtable/SQLite is not configured"
     )
     max_products_per_query: int = Field(default=6, env="MAX_PRODUCTS_PER_QUERY")
     max_rag_results: int = Field(default=4, env="MAX_RAG_RESULTS")

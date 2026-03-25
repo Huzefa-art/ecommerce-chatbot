@@ -23,8 +23,8 @@ cd backend
      `cp env.example .env`
 
 5. Start the FastAPI backend server:
-   `uvicorn main:app --reload`
+   `uvicorn main:app --reload --port 8001`
 
-By default, the server will run at http://127.0.0.1:8000.
-You can open http://127.0.0.1:8000/docs to view the Swagger API documentation.
+By default, the server will run at http://127.0.0.1:8001.
+You can open http://127.0.0.1:8001/docs to view the Swagger API documentation.
 Note: the server is set up to use `DEMO_MODE=true` by default, so it doesn't need Airtable/OpenAI keys to run. You can provide real keys in the `.env` file later.

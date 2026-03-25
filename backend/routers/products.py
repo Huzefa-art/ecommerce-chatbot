@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Query
 from typing import Optional
-from services.airtable_service import airtable_service
+from services.data_service import get_data_service
 
 router = APIRouter()
 
@@ -16,7 +16,8 @@ async def get_products(
     limit: int = Query(12, le=50),
 ):
     """Fetch products with optional filters."""
-    products = await airtable_service.search_products_structured(
+    data_service = get_data_service()
+    products = await data_service.search_products_structured(
         category=category,
         max_price=max_price,
         min_price=min_price,
@@ -28,7 +29,8 @@ async def get_products(
 
 @router.get("/products/{product_id}")
 async def get_product(product_id: str):
-    product = await airtable_service.get_product_by_id(product_id)
+    data_service = get_data_service()
+    product = await data_service.get_product_by_id(product_id)
     if not product:
         from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Product not found")

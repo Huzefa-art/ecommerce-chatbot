@@ -1,0 +1,79 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2.5rem;
+  background: var(--black);
+  border-bottom: 1px solid var(--dark-3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--white);
+}
+
+.logoIcon {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+}
+
+.logoSub {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover, .link.active {
+  color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.iconBtn {
+  background: none;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.iconBtn:hover {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .nav { padding: 1rem; }
+  .links { display: none; }
+}
