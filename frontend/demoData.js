@@ -1,0 +1,88 @@
+export const DEMO_PRODUCTS = [
+  {
+    id: 'P001', name: 'AeroStride Running Shoes', price: 4499,
+    category: 'Footwear', color: 'Black/White', rating: 4.7, stock: 23,
+    description: 'Lightweight mesh runners with responsive foam midsole. Perfect for daily training and long-distance runs. Ultra-breathable upper keeps feet cool.',
+    tags: ['running', 'lightweight', 'breathable', 'training'],
+    image_url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80',
+  },
+  {
+    id: 'P002', name: 'CloudWalk Comfort Sneakers', price: 3299,
+    category: 'Footwear', color: 'White', rating: 4.5, stock: 45,
+    description: 'Memory foam insole with cushioned outsole designed for all-day comfort. Ideal for walking, travel, and casual everyday wear.',
+    tags: ['walking', 'comfort', 'casual', 'everyday'],
+    image_url: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&q=80',
+  },
+  {
+    id: 'P003', name: 'Summit Pro Hiking Boots', price: 7999,
+    category: 'Footwear', color: 'Brown/Tan', rating: 4.8, stock: 12,
+    description: 'Waterproof Gore-Tex boots with aggressive lug sole for superior trail grip. Ankle support and Vibram outsole.',
+    tags: ['hiking', 'waterproof', 'trail', 'trekking'],
+    image_url: 'https://images.unsplash.com/photo-1520219306100-ec4afeeefe58?w=600&q=80',
+  },
+  {
+    id: 'P004', name: 'UrbanEdge Leather Sneakers', price: 5499,
+    category: 'Footwear', color: 'White/Cream', rating: 4.4, stock: 31,
+    description: 'Premium full-grain leather upper with minimalist design. Versatile enough for office to weekend.',
+    tags: ['leather', 'minimalist', 'premium', 'office'],
+    image_url: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80',
+  },
+  {
+    id: 'P005', name: 'FlexRun Pro Trail Shoes', price: 6299,
+    category: 'Footwear', color: 'Orange/Grey', rating: 4.6, stock: 8,
+    description: 'Zero-drop trail runners with puncture-resistant rock plate. Excellent for rough terrain and ultra-distances.',
+    tags: ['trail', 'running', 'zero-drop', 'ultra'],
+    image_url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=80',
+  },
+  {
+    id: 'P006', name: 'TechFit Performance Tee', price: 1299,
+    category: 'Apparel', color: 'Black', rating: 4.3, stock: 78,
+    description: 'Moisture-wicking polyester blend with flatlock seams. UPF 40+ sun protection.',
+    tags: ['workout', 'moisture-wicking', 'running', 'gym'],
+    image_url: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80',
+  },
+  {
+    id: 'P007', name: 'Alpine Fleece Jacket', price: 4999,
+    category: 'Apparel', color: 'Navy Blue', rating: 4.6, stock: 19,
+    description: '300-weight Polartec fleece with wind-resistant outer shell. Perfect mid-layer for cold-weather activities.',
+    tags: ['fleece', 'winter', 'hiking', 'outdoor'],
+    image_url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80',
+  },
+  {
+    id: 'P008', name: 'Stride Compression Shorts', price: 1799,
+    category: 'Apparel', color: 'Charcoal', rating: 4.4, stock: 55,
+    description: '4-way stretch compression shorts with targeted muscle support. Ideal for running, gym, and cycling.',
+    tags: ['compression', 'running', 'gym', 'performance'],
+    image_url: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80',
+  },
+  {
+    id: 'P009', name: 'ProTrack Sports Watch', price: 12999,
+    category: 'Accessories', color: 'Black', rating: 4.8, stock: 6,
+    description: 'GPS-enabled sports watch with heart rate monitor, sleep tracking, and 14-day battery life.',
+    tags: ['GPS', 'smartwatch', 'fitness tracker', 'running'],
+    image_url: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80',
+  },
+  {
+    id: 'P010', name: 'HydroMax Running Vest', price: 3799,
+    category: 'Accessories', color: 'Green/Black', rating: 4.5, stock: 14,
+    description: '2.5L hydration vest with 12 pockets including a 1.5L reservoir. Bounce-free fit system.',
+    tags: ['hydration', 'trail', 'running', 'vest'],
+    image_url: 'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=600&q=80',
+  },
+  {
+    id: 'P011', name: 'EliteGrip Gym Gloves', price: 899,
+    category: 'Accessories', color: 'Black', rating: 4.2, stock: 88,
+    description: 'Leather palm grip with wrist wrap support. Silicone grip dots for barbell training.',
+    tags: ['gym', 'weightlifting', 'grip', 'training'],
+    image_url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80',
+  },
+  {
+    id: 'P012', name: 'Recovery Foam Roller', price: 1599,
+    category: 'Accessories', color: 'Black/Grey', rating: 4.6, stock: 34,
+    description: 'High-density EVA foam roller with textured surface for deep tissue massage. Essential for recovery.',
+    tags: ['recovery', 'foam roller', 'massage', 'physio'],
+    image_url: 'https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=600&q=80',
+  },
+]
+
+export const CATEGORIES = ['All', 'Footwear', 'Apparel', 'Accessories']

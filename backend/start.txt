@@ -1,0 +1,30 @@
+# Start Instructions for AI Ecommerce Chatbot Backend
+
+To start the backend, run the following commands in your terminal or command prompt from this `backend` folder:
+
+cd backend 
+
+1. Create a Python virtual environment (if you haven't already):
+   `python -m venv venv`
+
+2. Activate the virtual environment:
+   - On Windows:
+     `venv\Scripts\activate`
+   - On Mac/Linux:
+     `source venv/bin/activate`
+
+3. Install the required dependencies:
+   `pip install -r requirements.txt`
+
+4. Copy the environment variables example file to `.env`:
+   - On Windows:
+     `copy env.example .env`
+   - On Mac/Linux:
+     `cp env.example .env`
+
+5. Start the FastAPI backend server:
+   `uvicorn main:app --reload`
+
+By default, the server will run at http://127.0.0.1:8000.
+You can open http://127.0.0.1:8000/docs to view the Swagger API documentation.
+Note: the server is set up to use `DEMO_MODE=true` by default, so it doesn't need Airtable/OpenAI keys to run. You can provide real keys in the `.env` file later.
